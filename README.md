@@ -2,7 +2,7 @@
 
 Web Programming with Python and JavaScript
 
-https://www.youtube.com/watch?v=Klf1B8_A6Ko
+https://youtu.be/4Tq_n4kjle8
 
 This project is a fully funcional food ordering system made in django.
 Beside python I did use bootstrap 4 for better control of all DOMs elements.

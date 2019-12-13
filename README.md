@@ -1,22 +1,19 @@
-# Project 3
 
-Web Programming with Python and JavaScript
+# Pizza orders ( Project 3 )
 
+The project is a food (pizza) ordering system
 https://youtu.be/4Tq_n4kjle8
 
-This project is a fully funcional food ordering system made in django.
-Beside python I did use bootstrap 4 for better control of all DOMs elements.
-No javascript has been used.
+## Getting Started
 
+The project was created with django 
 
-index.hmlt login.html signin.html menu.html extends layout.html file 
-my_orders.html and orders_manager shows list of all orders
-models.py contain all data structures
-urls.py contain routes to functions
-views.py cotain main program and fuctions which renders html files
+### Prerequisites
 
-Also in static folder there are pictures and style.css file which contain additional styling for html 
+In order to run the code install the dependencies and run
 
-Program automatically create superuser account at first start
+```
+pip3 install -r requirements.txt
+python3 manage.py runserver
+```
 
-My personal touch allowing site administrator to mark orders as complete and allowing users to see the status of their pending or completed orders

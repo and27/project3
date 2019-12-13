@@ -12,48 +12,77 @@
     <title>CS pizza</title>
 </head>
 <body style="height:100%">
-    <img id='pizza_background' src="{% static 'pizza_background.jpeg' %}">
+   
     {% if Category %}  <!--hide when not logged in-->
-    <div id='username'>
-        <h4 class='px-2' ><a href="{% url 'index' %}"><img src="{% static 'home.png' %}"></a> |
-            {{user.username}} | 
+
+<nav class="navbar navbar-light navbar-expand-lg bg-light">
+<a class="navbar-brand ">Pinochio-s Pizza</a>
+	<ul class="navbar-nav ml-auto">	
+		<li class="nav-item"><a class="nav-link" href="#">{{user.username}}</a></li>
+		<li class="nav-item">
             {% if user.is_superuser %}
-            <small><a href="{% url 'orders_manager' user Order_number %}">Orders manager</a></small> |
+            <a class="nav-link"href="{% url 'orders_manager' user Order_number %}">Orders manager</a> 
             {% endif %}
             {% if not user.is_superuser %}
-            <small><a href="{% url 'my_orders' Order_number %}">My orders</a></small> |
+            <a  class="nav-link"href="{% url 'my_orders' Order_number %}">My orders</a> 
+	
             {% endif %}
-            <small><a href="{% url 'logout' %}"> Log out&nbsp;</a></small>
-        </h4>
-    </div>
-    {% endif %}
-    <p id='logo' class='text-center m-0 font-weight-bold'><a href="{% url 'index' %}">CS Pizza</a></p>
-    <div id='category' class="list-group text-center">
+</li>
+
+		<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}"> Log out&nbsp;</a></li>
+	</ul>
+</nav>
+    {% else %}
+	<nav class="navbar navbar-light navbar-expand-lg bg-light">
+<a class="navbar-brand ">Pinochio-s Pizza</a>
+	<ul class="navbar-nav ml-auto">	
+	<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+	<li class="nav-item"><a class="nav-link" href="{% url 'signin' %}">Register</a></li>
+	</ul></nav>
+{% endif %}
+<div class="text-center m-4">
+    <img id="pi" src="{% static 'pi.png' %}">
+</div><!-- end image div -->
+<div class="row">
+<div class="col-md-12 mb-3">
+    <div class="list-inline text-center ">
         {% for category in Category %} 
-        <a href="{% url 'menu' category  %}" class="list-group-item list-group-item-action">{{category}}</a>
+       <div class="list-inline-item"> 
+	{% ifequal Active_category category|stringformat:"s"  %}
+		<a href="{% url 'menu' category  %}" ><button class="btn btn-info btn-lg ">{{category}}</button>
+		</a>
+	{% else %}
+		<a href="{% url 'menu' category  %}" ><button class="btn btn-light ">{{category}}</button>
+		</a>
+	{% endifequal %}
+</div>
         {% endfor %} 
     </div>
-    <div id='center_box' class='w-50  mx-auto  '>
+</div>
+</div><!--end row-->
+    <div id='center_box' class='w-60   mx-auto  '>
         {% block body%}
         {% endblock %}
     </div>
-    <div id='checkout' class='list-group text-right '>
+
+	
+    <div id='checkout' class="list-group p-3 rounded text-right">
     {% if Category %}  <!--hide when not logged in-->
-        <h3 class=' text-right pr-3'>CHECKOUT</h3>
+        <h3 class=' text-center h2 text-right text-dark   m-3 '>CHECKOUT</h3>
         <ul >
             <hr class='bg-info'>
             {% for check_cat in Checkout_category %}
                 <li class='text-info text-right pr-3'>{{check_cat|cut:"("|cut:")"|cut:","|cut:"'"}}</li>
                 {% for row in Checkout %}
                 {% if row.category == check_cat|cut:"("|cut:")"|cut:","|cut:"'"  %}
-                <li class='pr-3'>{{row}}&nbsp;<a href="{% url 'delete' row.category row.name row.price %}"><img class='plus rounded' src="{% static 'minus.png' %}"></a></li>
+                <li class='pr-3 text-muted'>{{row}}&nbsp;<a href="{% url 'delete' row.category row.name row.price %}"><img class='plus rounded' src="{% static 'minus.png' %}"></a></li>
                 {% endif %}
                 {% endfor %}
             {% endfor %} 
             <hr class='bg-info'>
             <li class='text-info text-right pr-3 '><h1><small class='text-white'>Total</small> ${{Total|floatformat:2}}</h1></li>
         </ul>
-    <a id='place_order'  href="{% url 'my_orders' Order_number %}"><div  class='bg-info w-50 rounded p-2  ml-auto mr-3 text-center text-white '><h4>Place order</h4></div></a>
+    <a id='place_order'  href="{% url 'my_orders' Order_number %}"><div class='bg-info   form-control w-40 rounded p-1  ml-auto mr-3 text-center text-white '><h4>Place order</h4></div></a>
     {% endif %}
     </div>
 </body>

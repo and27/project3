@@ -1,25 +1,44 @@
 {% extends "layout.html" %}
 {% block body %}
-<div class=' mx-auto w-50 p-3'>
+<div class=' h4 mx-auto w-50 m-2 pb-2'>
     {% if message %}
         <div class='text-center'>
             {{message}}
         </div>
     {% endif %}
+<div>
+<hr>
+
+	<h4 class="text-white display-3">  Pinocchio's <span class="badge badge-primary">Pizza</span> & <span class="badge badge-primary">Subs</span></h4>
+</div>
+
+	<button type="button" class="btn btn-outline-light form-control btn-lg" data-toggle="modal" data-target="#formModal" data-whatever="@getbootstrap">Log in now!</button>
+
+
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+<div class="modal-header">
+<img src="../static/pi.png" id="pi">
+</div>
     <form class='m-5' action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
-            <label for="username">Username:</label>
+            <label class='h4 text-muted' for="username">Username:</label>
             <input type="text" class="form-control" name="username">
         </div>
         <div class="form-group">
-            <label for="pwd">Password:</label>
+            <label class='h4 text-muted'  for="pwd">Password:</label>
             <input type="password" class="form-control" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Log In</button>
+        <button type="submit" class="btn btn-primary form-control">Log In</button>
     </form>
-    <div class='text-center m-2'>
+    <div class='text-center h5 text-muted'  m-2'>
         No account yet? <a href="{% url 'signin'%}">Sign In</a>
     </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 {% endblock %}

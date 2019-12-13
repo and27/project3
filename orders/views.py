@@ -36,6 +36,9 @@ def index(request):
     return render(request,"index.html",context) 
 
 def login_view(request):
+    if request.method == "GET":
+        return render(request,"login.html",{"message":""}) 
+
     username=request.POST["username"]
     password=request.POST["password"]
     user=authenticate(request,username=username,password=password)
@@ -88,6 +91,8 @@ def menu(request,category):
         "Topping_price": 0.00,
         "Order_number":order_number
     }
+  
+
     return render(request,"menu.html",context) 
 
 def add(request,category,name,price):

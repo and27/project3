@@ -1,3 +1,12 @@
+body{
+	background-image:url("pizza-back.png");
+	background-size:cover;
+}
+#pi{
+	width:7vw;
+	
+}
+
 #pizza_background {
     position: absolute;
     z-index:-99;
@@ -37,18 +46,31 @@
     src: url(Qwigley-Regular.ttf);
 }
 #center_box,#username {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.24);
     color: white;
 }
 th {
     border-bottom: 1px solid white;
 }
+.trans{
+
+}
+
 #checkout {
+ transition: transform 1s;
+ opacity:0.9;	
+    transform: scale(0.95);
     color:white;
     position: absolute;
-    top:33%;
-    right:0%;
-    width:23%;
+    top:8%;
+    right:2%;
+    width:19%;
+    background-color: #ffffffe3;
+}
+#checkout:hover{
+	opacity:1.0;
+	transform: scale(1);
+
 }
 .plus:hover {
     cursor: pointer;

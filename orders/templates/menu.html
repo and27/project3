@@ -1,12 +1,13 @@
 {% extends "layout.html" %}
 {% block body%}
 <div class='p-3'>
-    <table class='table-small w-50 mx-auto text-center '>
-        <caption style='caption-side:top;color:white;font-size: 30px;text-align: center'>{{Active_category}}</caption>
+
+    <table class="table w-50 mx-auto">
+        
         {% if Columns == 3 %}
         <thead class='thead-light'>
             <tr >
-                <th>Name</th>
+                <th>Type</th>
                 <th>Small</th>
                 <th>Large</th>
             </tr>
@@ -19,9 +20,9 @@
                 {% if row.small == None %}
                     <td></td>
                 {% else %}
-                    <td>${{row.small}}&nbsp;<a href="{% url 'add' Active_category row.name row.small %}"><img class='plus' src="{% static 'plus.png' %}"></a></td>
+                    <td>${{row.small}}&nbsp;<a href="{% url 'add' Active_category row.name row.small %}"><img class='plus' id="addb"  src="{% static 'plus.png' %}"></a></td>
                 {% endif %}
-                <td>${{row.large}}&nbsp;<a href="{% url 'add' Active_category row.name row.large %}"><img class='plus' src="{% static 'plus.png' %}"></a></td>
+                <td>${{row.large}}&nbsp;<a href="{% url 'add' Active_category row.name row.large %}"><img class='plus' id="addb"  src="{% static 'plus.png' %}"></a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -37,7 +38,7 @@
             {% for row in Menu %} 
             <tr>
                 <td>{{row.name}}</td>
-                <td>${{row.price}}&nbsp;<a href="{% url 'add' Active_category row.name row.price %}"><img class='plus' src="{% static 'plus.png' %}"></a></td>
+                <td>${{row.price}}&nbsp;<a href="{% url 'add' Active_category row.name row.price %}"><img class='plus' id="addb"  src="{% static 'plus.png' %}"></a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -53,10 +54,10 @@
             {% for row in Menu %} 
             {% if not forloop.counter|divisibleby:"2"  %}
             <tr>
-                <td>{{row.name}}&nbsp;<a href="{% url 'add' Active_category row.name Topping_price  %}"><img class='plus' src="{% static 'plus.png' %}"></a></td>
+                <td>{{row.name}}&nbsp;<a href="{% url 'add' Active_category row.name Topping_price  %}"><img class='plus' id="addb" src="{% static 'plus.png' %}"></a></td>
             {% endif %}
             {% if forloop.counter|divisibleby:"2"  %}
-                <td>{{row.name}}&nbsp;<a href="{% url 'add' Active_category row.name Topping_price %}"><img class='plus' src="{% static 'plus.png' %}"></a></td>
+                <td>{{row.name}}&nbsp;<a href="{% url 'add' Active_category row.name Topping_price %}"><img class='plus' id="addb"  src="{% static 'plus.png' %}"></a></td>
             </tr>
             {% endif %}
             {% endfor %}
@@ -69,7 +70,14 @@
         <h6 class='text-warning mx-auto'>Special: Double Cheese + Double Onions + Double Fresh Garlic</h6>
 {% endif %}
 {% if message %}
-        <h6 class='text-danger mx-auto '>sfgsg{{message}}</h6>
+        <h6 class='text-danger mx-auto '>{{message}}</h6>
     </div>
 {% endif %}
+<script >
+document.querySelector('#addb').addEventListener('click', ()=>{
+document.querySelector('#checkout').style.transform="scale(1)";
+document.querySelector('#checkout').style.opacity="1.0"
+})
+</script>
+
 {% endblock %}
